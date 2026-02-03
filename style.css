@@ -1,0 +1,505 @@
+/* --- CẤU HÌNH CHUNG --- */
+:root {
+  --bg-dark: #0a0a0a;
+  --text-gold: #c5a059;
+  --text-white: #f3f4f6;
+  --card-bg: rgba(255, 255, 255, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden; /* Quan trọng để tránh thanh cuộn ngang thừa */
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Cormorant Garamond", serif;
+  color: var(--text-gold);
+}
+
+/* --- MÀN HÌNH CHỜ (LOADER) --- */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease;
+}
+.loader-text {
+  color: var(--text-gold);
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  animation: blink 2s infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+.loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+  position: relative;
+}
+
+.title {
+  font-size: 5rem;
+  line-height: 1;
+  margin: 20px 0;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #bf953f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.scroll-down {
+  margin-top: 50px;
+  opacity: 0.7;
+  animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* --- INTRO SECTION --- */
+.intro {
+  padding: 100px 20px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+.text-content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #ccc;
+}
+.highlight-box {
+  margin-top: 40px;
+  padding: 20px;
+  border: 1px solid var(--text-gold);
+  display: inline-block;
+  border-radius: 50px;
+}
+.divider {
+  margin: 0 15px;
+  color: var(--text-gold);
+}
+
+/* --- HORIZONTAL GALLERY (QUAN TRỌNG) --- */
+/* Wrapper bao quanh để giữ chiều cao */
+.gallery-wrapper {
+  width: 100%;
+  /* Không set height ở đây, GSAP sẽ quản lý việc pin */
+  overflow: hidden;
+}
+
+/* Container chứa các panel nằm ngang */
+.gallery-container {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 400%; /* 4 panels * 100% hoặc tùy chỉnh */
+  height: 100vh;
+}
+
+.panel {
+  width: 100vw; /* Mỗi panel chiếm trọn màn hình */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  padding: 20px;
+}
+
+.text-panel {
+  background-color: #0f0f0f;
+  flex-direction: column;
+  text-align: center;
+}
+.text-panel h2 {
+  font-size: 4rem;
+}
+
+.image-panel img {
+  max-width: 80%;
+  max-height: 70%;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.caption {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 30px;
+  border-left: 3px solid var(--text-gold);
+  backdrop-filter: blur(10px);
+}
+
+/* --- GOALS SECTION --- */
+.goals {
+  padding: 100px 20px;
+  background: #050505;
+  text-align: center;
+}
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+.card {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 20px;
+  width: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-10px);
+  border-color: var(--text-gold);
+}
+.icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+/* --- FOOTER --- */
+footer {
+  padding: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+  .gallery-container {
+    width: 400%;
+  } /* Vẫn giữ độ rộng lớn để scroll */
+  .image-panel img {
+    max-width: 95%;
+  }
+}
+/* --- STYLE CHO GALLERY DỌC (STACKING) --- */
+.stack-wrapper {
+  background-color: #050505; /* Nền tối hơn */
+  padding-bottom: 100px;
+}
+
+.stack-intro {
+  text-align: center;
+  padding: 100px 20px 50px;
+}
+
+.stack-intro h2 {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+.stack-intro p {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.stack-area {
+  /* Đây là khu vực chứa hiệu ứng */
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  /* Không set height cứng, GSAP sẽ xử lý */
+}
+
+.stack-card {
+  /* Một tấm thẻ */
+  height: 80vh; /* Chiều cao thẻ bằng 80% màn hình */
+  width: 100%;
+  border-radius: 40px;
+  position: sticky; /* Quan trọng: Giúp thẻ dính lại */
+  top: 10vh; /* Cách đỉnh màn hình 1 chút */
+  margin-bottom: 10vh; /* Khoảng cách giữa các thẻ khi chưa xếp chồng */
+  overflow: hidden;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5); /* Bóng đổ ngược lên trên */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Màu sắc từng thẻ */
+.card-blue {
+  background: linear-gradient(135deg, #1e3a8a, #0f172a);
+}
+.card-gold {
+  background: linear-gradient(135deg, #78350f, #451a03);
+} /* Nâu đồng */
+.card-dark {
+  background: linear-gradient(135deg, #333333, #000000);
+}
+
+.card-content {
+  display: flex;
+  width: 90%;
+  height: 80%;
+  align-items: center;
+  gap: 50px;
+}
+
+.card-text {
+  flex: 1;
+  color: #fff;
+}
+.card-text h3 {
+  font-size: 3rem;
+  color: #fff; /* Ghi đè màu vàng mặc định */
+  margin-bottom: 20px;
+}
+.card-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+.tag {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.card-img {
+  flex: 1;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.stack-card:hover .card-img img {
+  transform: scale(1.05);
+}
+
+/* Mobile Responsive cho phần này */
+@media (max-width: 768px) {
+  .card-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .card-img {
+    width: 100%;
+    height: 50%;
+  }
+  .card-text h3 {
+    font-size: 2rem;
+  }
+}
+/* --- GRAND FINALE SECTION --- */
+.grand-finale {
+  background-color: #020202;
+  padding: 150px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hiệu ứng nền mờ nhẹ */
+.grand-finale::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--text-gold),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+.finale-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Chia đôi màn hình */
+  gap: 80px;
+  align-items: start;
+}
+
+/* Cột trái */
+.overline {
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #666;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.finale-title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #cfc09f, #ffecb3, #bfa05d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.finale-desc {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #999;
+  max-width: 90%;
+  margin-bottom: 40px;
+}
+
+.signature {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--text-gold);
+}
+
+/* Cột phải (List mục tiêu) */
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.goal-item {
+  display: flex;
+  gap: 30px;
+  position: relative;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+  border-color: var(--text-gold);
+  transform: translateX(10px);
+}
+
+.goal-number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.05); /* Số mờ làm nền */
+  font-family: "Cormorant Garamond", serif;
+  line-height: 1;
+}
+
+.goal-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.goal-icon svg {
+  stroke: var(--text-gold);
+}
+
+.goal-details p {
+  color: #888;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* --- PRO FOOTER --- */
+.pro-footer {
+  background-color: #000;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.footer-line {
+  width: 50px;
+  height: 2px;
+  background: var(--text-gold);
+  margin: 0 auto 20px;
+  opacity: 0.5;
+}
+
+.footer-content p {
+  font-size: 0.8rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 5px 0;
+}
+
+/* RESPONSIVE: Mobile */
+@media (max-width: 768px) {
+  .finale-content {
+    grid-template-columns: 1fr; /* Về 1 cột */
+    gap: 50px;
+  }
+  .finale-title {
+    font-size: 3rem;
+  }
+}
